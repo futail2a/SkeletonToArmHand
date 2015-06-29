@@ -113,17 +113,17 @@ RTC::ReturnCode_t SkeletonToArmHand::onDeactivated(RTC::UniqueId ec_id)
 
 RTC::ReturnCode_t SkeletonToArmHand::onExecute(RTC::UniqueId ec_id)
 {
-  if(m_skeletonIn.isNew()){
-	  m_skeletonIn.read();
-	  Vector4 hand_r;
-	  hand_r = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT];
-	  m_hand.data[0] = hand_r.v[0];
-	  m_hand.data[1] = hand_r.v[1];
-	  m_hand.data[2] = hand_r.v[2];
-	  m_hand.data[3] = hand_r.v[3];
+	if (m_skeletonIn.isNew()){
+		m_skeletonIn.read();
+		//m_skeleton.SkeletonData[0].eSkeletonPositionTrackingState[0];
+		Vector4 hand_r;
+		hand_r = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT];
+		m_hand.data[0] = hand_r.v[0];
+		std::cout << hand_r.v[0] << std::endl;
 
-	  m_handOut.write();
-  }
+		m_handOut.write();
+
+	}
   return RTC::RTC_OK;
 }
 
