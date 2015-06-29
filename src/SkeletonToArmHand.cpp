@@ -118,8 +118,11 @@ RTC::ReturnCode_t SkeletonToArmHand::onExecute(RTC::UniqueId ec_id)
 		//m_skeleton.SkeletonData[0].eSkeletonPositionTrackingState[0];
 		Vector4 hand_r;
 		hand_r = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT];
+		m_hand.data.length(4);
 		m_hand.data[0] = hand_r.v[0];
-		std::cout << hand_r.v[0] << std::endl;
+		m_hand.data[1] = hand_r.v[1];
+		m_hand.data[1] = hand_r.v[2];
+		m_hand.data[1] = hand_r.v[3];
 
 		m_handOut.write();
 
