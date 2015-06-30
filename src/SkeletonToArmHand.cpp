@@ -121,8 +121,8 @@ RTC::ReturnCode_t SkeletonToArmHand::onExecute(RTC::UniqueId ec_id)
 		m_hand.data.length(4);
 		m_hand.data[0] = hand_r.v[0];
 		m_hand.data[1] = hand_r.v[1];
-		m_hand.data[1] = hand_r.v[2];
-		m_hand.data[1] = hand_r.v[3];
+		m_hand.data[2] = hand_r.v[2];
+		m_hand.data[3] = hand_r.v[3];
 
 		m_handOut.write();
 
