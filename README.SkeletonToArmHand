@@ -91,8 +91,26 @@ Lang Type:
 ======================================================================
 # <rtc-template block="outport">
 
-	Name:        hand
+	Name:        hand_r
 	PortNumber:  0
+	Description: 
+	PortType: 
+	DataType:    RTC::TimedDoubleSeq
+	MaxOut: 
+	[Data Elements]
+		Name:
+		Type:            
+		Number:          
+		Semantics:       
+		Unit:            
+		Frequency:       
+		Operation Cycle: 
+		RangeLow:
+		RangeHigh:
+		DefaultValue:
+
+	Name:        hand_l
+	PortNumber:  1
 	Description: 
 	PortType: 
 	DataType:    RTC::TimedDoubleSeq

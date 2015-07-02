@@ -36,7 +36,8 @@ SkeletonToArmHand::SkeletonToArmHand(RTC::Manager* manager)
     // <rtc-template block="initializer">
   : RTC::DataFlowComponentBase(manager),
     m_skeletonIn("skeleton", m_skeleton),
-    m_handOut("hand", m_hand)
+    m_hand_rOut("hand_r", m_hand_r),
+    m_hand_lOut("hand_l", m_hand_l)
 
     // </rtc-template>
 {
@@ -59,7 +60,8 @@ RTC::ReturnCode_t SkeletonToArmHand::onInitialize()
   addInPort("skeleton", m_skeletonIn);
   
   // Set OutPort buffer
-  addOutPort("hand", m_handOut);
+  addOutPort("hand_r", m_hand_rOut);
+  addOutPort("hand_l", m_hand_lOut);
   
   // Set service provider to Ports
   
@@ -71,7 +73,10 @@ RTC::ReturnCode_t SkeletonToArmHand::onInitialize()
 
   // <rtc-template block="bind_config">
   // </rtc-template>
-  
+
+  m_hand_r.data.length(4);
+  m_hand_l.data.length(4);
+
   return RTC::RTC_OK;
 }
 
@@ -115,17 +120,27 @@ RTC::ReturnCode_t SkeletonToArmHand::onExecute(RTC::UniqueId ec_id)
 {
 	if (m_skeletonIn.isNew()){
 		m_skeletonIn.read();
-		//m_skeleton.SkeletonData[0].eSkeletonPositionTrackingState[0];
-		Vector4 hand_r;
-		hand_r = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT];
-		m_hand.data.length(4);
-		m_hand.data[0] = hand_r.v[0];
-		m_hand.data[1] = hand_r.v[1];
-		m_hand.data[2] = hand_r.v[2];
-		m_hand.data[3] = hand_r.v[3];
 
-		m_handOut.write();
+		//If a right hand was tracked
+		if (m_skeleton.SkeletonData[0].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_RIGHT] == NUI_SKELETON_POSITION_TRACKED){
 
+			m_hand_r.data[0] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[0];
+			m_hand_r.data[1] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[1];
+			m_hand_r.data[2] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[2];
+			m_hand_r.data[3] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[3];
+			m_hand_rOut.write();
+		}
+
+		//If a left hand was tracked
+		if (m_skeleton.SkeletonData[0].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_LEFT] == NUI_SKELETON_POSITION_TRACKED){
+
+			m_hand_l.data[0] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[0];
+			m_hand_l.data[1] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[1];
+			m_hand_l.data[2] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[2];
+			m_hand_l.data[3] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[3];
+			m_hand_lOut.write();
+			
+		}
 	}
   return RTC::RTC_OK;
 }
