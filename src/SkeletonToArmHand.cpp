@@ -121,25 +121,39 @@ RTC::ReturnCode_t SkeletonToArmHand::onExecute(RTC::UniqueId ec_id)
 	if (m_skeletonIn.isNew()){
 		m_skeletonIn.read();
 
-		//If a right hand was tracked
-		if (m_skeleton.SkeletonData[0].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_RIGHT] == NUI_SKELETON_POSITION_TRACKED){
+		//who was tracked
+		for (int i = 0; i < 6; i++){
+			if (m_skeleton.SkeletonData[i].trackingState == NUI_SKELETON_TRACKED){
 
-			m_hand_r.data[0] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[0];
-			m_hand_r.data[1] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[1];
-			m_hand_r.data[2] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[2];
-			m_hand_r.data[3] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[3];
-			m_hand_rOut.write();
-		}
+				//If a right hand was tracked
+				if (m_skeleton.SkeletonData[i].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_RIGHT] == NUI_SKELETON_POSITION_TRACKED){
 
-		//If a left hand was tracked
-		if (m_skeleton.SkeletonData[0].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_LEFT] == NUI_SKELETON_POSITION_TRACKED){
+					m_hand_r.data[0] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[0];
+					m_hand_r.data[1] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[1];
+					m_hand_r.data[2] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[2];
+					m_hand_r.data[3] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[3];
+					m_hand_rOut.write();
+				}
 
-			m_hand_l.data[0] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[0];
-			m_hand_l.data[1] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[1];
-			m_hand_l.data[2] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[2];
-			m_hand_l.data[3] = m_skeleton.SkeletonData[0].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[3];
-			m_hand_lOut.write();
-			
+				//If a left hand was tracked
+				if (m_skeleton.SkeletonData[i].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_LEFT] == NUI_SKELETON_POSITION_TRACKED){
+
+					m_hand_l.data[0] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[0];
+					m_hand_l.data[1] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[1];
+					m_hand_l.data[2] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[2];
+					m_hand_l.data[3] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[3];
+					m_hand_lOut.write();
+				}
+				break;
+			}
+			/*else{
+				m_hand_r.data[0] = 0;
+				m_hand_r.data[1] = 0;
+				m_hand_r.data[2] = 0;
+				m_hand_r.data[3] = 0;
+				m_hand_rOut.write();
+
+			}*/
 		}
 	}
   return RTC::RTC_OK;

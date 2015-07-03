@@ -274,6 +274,9 @@ class SkeletonToArmHand
   // <rtc-template block="private_operation">
   
   // </rtc-template>
+	 Vector4 m_rHandBuffer;
+	 Vector4 m_lHandBuffer;
+
 
 };
 
