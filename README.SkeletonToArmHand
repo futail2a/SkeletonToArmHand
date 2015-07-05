@@ -95,7 +95,7 @@ Lang Type:
 	PortNumber:  0
 	Description: 
 	PortType: 
-	DataType:    RTC::TimedDoubleSeq
+	DataType:    RTC::TimedPose3D
 	MaxOut: 
 	[Data Elements]
 		Name:
@@ -113,7 +113,7 @@ Lang Type:
 	PortNumber:  1
 	Description: 
 	PortType: 
-	DataType:    RTC::TimedDoubleSeq
+	DataType:    RTC::TimedPose3D
 	MaxOut: 
 	[Data Elements]
 		Name:

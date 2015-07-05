@@ -117,8 +117,8 @@ The ports provided by the component are described below:
 Name            Type        Data type                      Purpose
 =============== =========== ============================== =======
 skeleton        InPort      KINECT::NuiSkeletonFrame       
-hand_r          OutPort     RTC::TimedDoubleSeq            
-hand_l          OutPort     RTC::TimedDoubleSeq            
+hand_r          OutPort     RTC::TimedPose3D               
+hand_l          OutPort     RTC::TimedPose3D               
 =============== =========== ============================== =======
 
 Examples

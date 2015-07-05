@@ -240,14 +240,14 @@ class SkeletonToArmHand
 
   // DataOutPort declaration
   // <rtc-template block="outport_declare">
-  RTC::TimedDoubleSeq m_hand_r;
+  RTC::TimedPose3D m_hand_r;
   /*!
    */
-  OutPort<RTC::TimedDoubleSeq> m_hand_rOut;
-  RTC::TimedDoubleSeq m_hand_l;
+  OutPort<RTC::TimedPose3D> m_hand_rOut;
+  RTC::TimedPose3D m_hand_l;
   /*!
    */
-  OutPort<RTC::TimedDoubleSeq> m_hand_lOut;
+  OutPort<RTC::TimedPose3D> m_hand_lOut;
   
   // </rtc-template>
 

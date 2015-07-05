@@ -73,10 +73,7 @@ RTC::ReturnCode_t SkeletonToArmHand::onInitialize()
 
   // <rtc-template block="bind_config">
   // </rtc-template>
-
-  m_hand_r.data.length(4);
-  m_hand_l.data.length(4);
-
+  
   return RTC::RTC_OK;
 }
 

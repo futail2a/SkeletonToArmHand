@@ -109,8 +109,8 @@ SkeletonToArmHandは ``SkeletonToArmHandComp`` を実行（ ``${prefix}/componen
 ポート名        ポート型    データ型                       意味
 =============== =========== ============================== ====
 skeleton        InPort      KINECT::NuiSkeletonFrame       
-hand_r          OutPort     RTC::TimedDoubleSeq            
-hand_l          OutPort     RTC::TimedDoubleSeq            
+hand_r          OutPort     RTC::TimedPose3D               
+hand_l          OutPort     RTC::TimedPose3D               
 =============== =========== ============================== ====
 
 例
