@@ -125,20 +125,20 @@ RTC::ReturnCode_t SkeletonToArmHand::onExecute(RTC::UniqueId ec_id)
 				//If a right hand was tracked
 				if (m_skeleton.SkeletonData[i].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_RIGHT] == NUI_SKELETON_POSITION_TRACKED){
 
-					m_hand_r.data[0] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[0];
-					m_hand_r.data[1] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[1];
-					m_hand_r.data[2] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[2];
-					m_hand_r.data[3] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[3];
+					m_hand_r.data.position.x = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[0];
+					m_hand_r.data.position.y = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[1];
+					m_hand_r.data.position.z = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[2];
+					//m_hand_r.data[3] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[3];
 					m_hand_rOut.write();
 				}
 
 				//If a left hand was tracked
 				if (m_skeleton.SkeletonData[i].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_LEFT] == NUI_SKELETON_POSITION_TRACKED){
 
-					m_hand_l.data[0] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[0];
-					m_hand_l.data[1] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[1];
-					m_hand_l.data[2] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[2];
-					m_hand_l.data[3] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[3];
+					m_hand_l.data.position.x = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[0];
+					m_hand_l.data.position.y = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[1];
+					m_hand_l.data.position.z = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[2];
+					//m_hand_l.data[3] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[3];
 					m_hand_lOut.write();
 				}
 				break;
