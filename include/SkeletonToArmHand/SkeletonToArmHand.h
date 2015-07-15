@@ -276,7 +276,7 @@ class SkeletonToArmHand
   // </rtc-template>
 	 Vector4 m_rHandBuffer;
 	 Vector4 m_lHandBuffer;
-
+	 TimedPose3D m_spine;
 
 };
 

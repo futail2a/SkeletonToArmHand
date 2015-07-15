@@ -122,22 +122,26 @@ RTC::ReturnCode_t SkeletonToArmHand::onExecute(RTC::UniqueId ec_id)
 		for (int i = 0; i < 6; i++){
 			if (m_skeleton.SkeletonData[i].trackingState == NUI_SKELETON_TRACKED){
 
+				if (m_skeleton.SkeletonData[i].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_SPINE] == NUI_SKELETON_POSITION_TRACKED){
+					m_spine.data.position.x = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_SPINE].v[0];
+					m_spine.data.position.y = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_SPINE].v[1];
+					m_spine.data.position.z = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_SPINE].v[2];
+				}
+
 				//If a right hand was tracked
 				if (m_skeleton.SkeletonData[i].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_RIGHT] == NUI_SKELETON_POSITION_TRACKED){
-
-					m_hand_r.data.position.x = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[0];
-					m_hand_r.data.position.y = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[1];
-					m_hand_r.data.position.z = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[2];
+					m_hand_r.data.position.x = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[0] - m_spine.data.position.x;
+					m_hand_r.data.position.y = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[1] - m_spine.data.position.y;
+					m_hand_r.data.position.z = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[2] - m_spine.data.position.z;
 					//m_hand_r.data[3] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT].v[3];
 					m_hand_rOut.write();
 				}
 
 				//If a left hand was tracked
 				if (m_skeleton.SkeletonData[i].eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_LEFT] == NUI_SKELETON_POSITION_TRACKED){
-
-					m_hand_l.data.position.x = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[0];
-					m_hand_l.data.position.y = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[1];
-					m_hand_l.data.position.z = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[2];
+					m_hand_l.data.position.x = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[0] - m_spine.data.position.x;
+					m_hand_l.data.position.y = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[1] - m_spine.data.position.y;
+					m_hand_l.data.position.z = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[2] - m_spine.data.position.z;
 					//m_hand_l.data[3] = m_skeleton.SkeletonData[i].skeletonPositions[NUI_SKELETON_POSITION_HAND_LEFT].v[3];
 					m_hand_lOut.write();
 				}
